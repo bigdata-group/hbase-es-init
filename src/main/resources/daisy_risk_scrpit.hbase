@@ -1,0 +1,118 @@
+create 'risk_ent_encounter', {NAME=>'info', COMPRESSION=>'lzo'}
+disable 'risk_ent_encounter'
+alter 'risk_ent_encounter', METHOD => 'table_att', 'coprocessor' => 'hdfs:///hbase_es/hbase-observer-es-1.3.jar|com.bigdata.hbase.HbaseDataSyncEsObserver|1001|es_type=risk_ent_encounter,es_index=daisy_risk'
+enable 'risk_ent_encounter'
+
+disable 'risk_ent_encounter'
+alter 'risk_ent_encounter', METHOD => 'table_att_unset',NAME => 'coprocessor$1'
+
+hadoop jar hbase-es-init.jar  daisy_risk risk_ent_encounter info
+
+
+
+put 'risk_ent_encounter','中太建设集团股份有限公司_AYX_0','info:address','北大'
+put 'risk_ent_encounter','中太建设集团股份有限公司_AYX_0','info:address','廊坊市广阳道20号'
+
+scan 'risk_ent_encounter', {FILTER=>"SingleColumnValueFilter('info','entName',=,'regexstring:小米.*')"}
+scan 'risk_ent_encounter', {FILTER=>"SingleColumnValueFilter('info','entName',=,'regexstring:金河.*')"}
+
+get 'risk_ent_encounter','小米科技有限责任公司_AYX_0'
+get 'risk_ent_encounter','小米科技有限责任公司_AYX_1'
+
+get 'risk_ent_encounter','中太建设集团股份有限公司_AYX_0'
+
+
+
+put 'risk_ent_credit_result','北京创锐文化传媒有限公司_AYX_scores_4','info:name','企业背景得分'
+put 'risk_ent_credit_result','北京奇虎科技有限公司_AYX_scores_4','info:name','企业背景得分'
+put 'risk_ent_credit_result','海南金海浆纸业有限公司_AYX_scores_1','info:name','企业背景得分'
+put 'risk_ent_credit_result','灵宝黄金股份有限公司_AYX_scores_3','info:name','企业背景得分'
+put 'risk_ent_credit_result','上海汽车集团股份有限公司_AYX_scores_1','info:name','企业背景得分'
+put 'risk_ent_credit_result','深圳市振业(集团)股份有限公司_AYX_scores_4','info:name','企业背景得分'
+put 'risk_ent_credit_result','浙江德清农村商业银行股份有限公司_AYX_scores_4','info:name','企业背景得分'
+put 'risk_ent_credit_result','中太建设集团股份有限公司_AYX_scores_4','info:name','企业背景得分'
+
+disable 'risk_ent_encounter'
+alter 'risk_ent_encounter', METHOD => 'table_att_unset',NAME => 'coprocessor$1'
+drop 'risk_ent_encounter'
+
+
+##删除表
+disable 'risk_dishone_exeperson'
+drop 'risk_dishone_exeperson'
+
+disable 'risk_executed_person'
+drop 'risk_executed_person'
+
+disable 'risk_tax_negative'
+drop 'risk_tax_negative'
+
+
+disable 'risk_court_general'
+drop 'risk_court_general'
+
+disable 'risk_person_basic'
+drop 'risk_person_basic'
+
+disable 'risk_person_execute'
+drop 'risk_person_execute'
+
+disable 'risk_person_smallloan_credit'
+drop 'risk_person_smallloan_credit'
+
+create 'risk_dishone_exeperson', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_executed_person', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_tax_negative', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_court_general', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_person_basic', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_person_execute', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_person_smallloan_credit', {NAME=>'info', COMPRESSION=>'lzo'}
+
+##  新加的表结构   需要删除
+
+disable 'risk_ent_shareholder'
+drop 'risk_ent_shareholder'
+
+disable 'risk_ent_personMain'
+drop 'risk_ent_personMain'
+
+disable 'risk_ent_filiation'
+drop 'risk_ent_filiation'
+
+disable 'risk_ent_alter'
+drop 'risk_ent_alter'
+
+disable 'risk_ent_invest'
+drop 'risk_ent_invest'
+
+disable 'risk_ent_litigation'
+drop 'risk_ent_litigation'
+
+disable 'risk_ent_morgua'
+drop 'risk_ent_morgua'
+
+disable 'risk_ent_case'
+drop 'risk_ent_case'
+
+disable 'risk_ent_annual_base'
+drop 'risk_ent_annual_base'
+
+disable 'risk_ent_annual_pBase'
+drop 'risk_ent_annual_pBase'
+
+disable 'risk_ent_credit_result'
+drop 'risk_ent_credit_result'
+
+create 'risk_ent_shareholder', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_personMain', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_filiation', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_alter', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_invest', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_litigation', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_morgua', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_case', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_annual_base', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_annual_pBase', {NAME=>'info', COMPRESSION=>'lzo'}
+create 'risk_ent_credit_result', {NAME=>'info', COMPRESSION=>'lzo'}
+
+
